@@ -8,7 +8,7 @@ public class CalendarController {
 
     @RequestMapping("/")
     public String home(){
-        asd
+
         return "index";
     }
 
