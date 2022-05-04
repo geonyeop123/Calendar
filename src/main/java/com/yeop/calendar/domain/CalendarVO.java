@@ -1,19 +1,18 @@
 package com.yeop.calendar.domain;
 
-import java.util.Calendar;
-
-public class DateVO {
+public class CalendarVO {
     private Integer year;
     private Integer month;
     private CalendarMaker cm;
 
-    public DateVO(){}
+    public CalendarVO(){}
 
-    public DateVO(Integer year, Integer month){
+    public CalendarVO(Integer year, Integer month){
         this.year = year;
         this.month = month;
     }
 
+    public void setCm(CalendarMaker cm) { this.cm = cm; }
     public Integer getYear() {
         return year;
     }

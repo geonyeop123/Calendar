@@ -1,13 +1,9 @@
 package com.yeop.calendar;
 
 import com.yeop.calendar.domain.CalendarMaker;
-import com.yeop.calendar.domain.DateVO;
+import com.yeop.calendar.domain.CalendarVO;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.time.LocalDate;
-import java.time.temporal.ChronoField;
-import java.util.Calendar;
 
 @SpringBootTest
 class CalendarApplicationTests {
@@ -15,7 +11,7 @@ class CalendarApplicationTests {
     @Test
     void contextLoads() {
         String yoil = "일월화수목금토";
-        DateVO vo = new DateVO(2023, 1);
+        CalendarVO vo = new CalendarVO(2023, 1);
         CalendarMaker cm = new CalendarMaker(vo);
 
         System.out.println(toString());

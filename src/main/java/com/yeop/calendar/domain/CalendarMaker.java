@@ -18,9 +18,9 @@ public class CalendarMaker {
     CalendarMaker(){}
 
     public CalendarMaker(Integer year, Integer month){
-        this(new DateVO(year, month));
+        this(new CalendarVO(year, month));
     }
-    public CalendarMaker(DateVO vo){
+    public CalendarMaker(CalendarVO vo){
         // Date 값 세팅
         date = LocalDate.of(vo.getYear(), vo.getMonth(), 1);
         // n년 n월 1일의 요일 값 세팅
