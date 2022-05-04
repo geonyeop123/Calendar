@@ -12,7 +12,6 @@ public class DateVO {
     public DateVO(Integer year, Integer month){
         this.year = year;
         this.month = month;
-        cm = new CalendarMaker(this);
     }
 
     public Integer getYear() {
@@ -38,14 +37,18 @@ public class DateVO {
 
     public void print(){
         System.out.println(toString());
-        System.out.println();
-        System.out.println("=============="+month+"월==============");
-        System.out.println("월   화   수   목   금   토   일");
-        System.out.println("01  02   03  04  05   06  07");
-        System.out.println("08  09   10  11  12   13  14");
-        System.out.println("15  16   17  18  19   20  21");
-        System.out.println("22  23   24  25  26   27  28");
-        System.out.println("29  30  31");
+        System.out.println("\t\t\t"+month+"월\t\t\t");
+        System.out.println("일\t월\t화\t수\t목\t금\t토\t");
+        int index = 0;
+        for(int i : getCm().getDayList()){
+            if(index >= 7){
+                System.out.println();
+                index = 0;
+            }
+            System.out.print(i);
+            System.out.print("\t");
+            index++;
+        }
     }
 
     @Override
