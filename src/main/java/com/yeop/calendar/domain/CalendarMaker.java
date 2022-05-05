@@ -15,7 +15,7 @@ public class CalendarMaker {
 
     private List<Integer> dayList;
 
-    CalendarMaker(){}
+    public CalendarMaker(){}
 
     public CalendarMaker(Integer year, Integer month){
         this(new CalendarVO(year, month));

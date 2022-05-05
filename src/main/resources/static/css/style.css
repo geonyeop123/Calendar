@@ -1,0 +1,39 @@
+body {
+  width: 50%;
+}
+.main_container {
+  height: 500px;
+}
+
+table.calendar_table {
+  border-collapse: collapse;
+  text-align: center;
+  width: 50%;
+  height: 100px;
+}
+table.calendar_table thead th {
+  font-weight: bold;
+  height: 50px;
+  color: #222222;
+  background: #f3f6f7;
+}
+table.calendar_table tbody th {
+  font-weight: bold;
+  background: #f3f6f7;
+}
+table.calendar_table td {
+  height: 50px;
+}
+table.calendar_table tr {
+}
+.title{
+  width:50%;
+  height:50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.title button {
+  height:100%;
+  width:40px;
+}

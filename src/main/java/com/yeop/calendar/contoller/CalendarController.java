@@ -4,10 +4,7 @@ import com.yeop.calendar.domain.CalendarMaker;
 import com.yeop.calendar.domain.CalendarVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,12 +17,13 @@ public class CalendarController {
         /////
         // 선언
         /////
-        LocalDate date = LocalDate.now();
+        LocalDate date;
 
         /////
         // 유효성 검사
         /////
         if(vo.getYear() == null || vo.getMonth() == null){
+            date = LocalDate.now();
             vo = new CalendarVO(date.getYear(), date.getMonth().getValue());
         }
 
@@ -38,8 +36,8 @@ public class CalendarController {
 
     @ResponseBody
     @PostMapping("/proc")
-    public CalendarVO proc(CalendarVO vo){
-
+    public CalendarVO proc(@RequestBody CalendarVO vo){
+        System.out.println(vo);
         CalendarMaker cm = new CalendarMaker(vo);
         vo.setCm(cm);
 

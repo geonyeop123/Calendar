@@ -13,6 +13,7 @@ public class CalendarVO {
     }
 
     public void setCm(CalendarMaker cm) { this.cm = cm; }
+
     public Integer getYear() {
         return year;
     }
