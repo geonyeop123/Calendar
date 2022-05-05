@@ -35,22 +35,6 @@ public class CalendarVO {
     }
 
 
-    public void print(){
-        System.out.println(toString());
-        System.out.println("\t\t\t"+month+"월\t\t\t");
-        System.out.println("일\t월\t화\t수\t목\t금\t토\t");
-        int index = 0;
-        for(int i : getCm().getDayList()){
-            if(index >= 7){
-                System.out.println();
-                index = 0;
-            }
-            System.out.print(i);
-            System.out.print("\t");
-            index++;
-        }
-    }
-
     @Override
     public String toString() {
         return "DateVO{" +

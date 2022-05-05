@@ -51,7 +51,7 @@ public class CalendarMaker {
         // 현재의 달을 표시
         list.addAll(makeList(1, lastDay));
         // 다음 달을 표시해주어야 할 경우 수행될 로직
-        list.addAll(makeList(1, lastDayYoil == 7 ? 6 : 6 - lastDayYoil));
+        if(lastDayYoil != 6) list.addAll(makeList(1, lastDayYoil == 7 ? 6 : 6 - lastDayYoil));
 
         return list;
     }

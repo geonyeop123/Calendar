@@ -6,8 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
 
 @Controller
 public class CalendarController {
@@ -22,7 +22,8 @@ public class CalendarController {
         /////
         // 유효성 검사
         /////
-        if(vo.getYear() == null || vo.getMonth() == null){
+        // 값이 없거나, month가 0~12가 아닌 경우 현재의 일자로 세팅
+        if((vo.getYear() == null || vo.getMonth() == null) || (0 > vo.getMonth()) || ( 12 < vo.getMonth())){
             date = LocalDate.now();
             vo = new CalendarVO(date.getYear(), date.getMonth().getValue());
         }
@@ -36,11 +37,30 @@ public class CalendarController {
 
     @ResponseBody
     @PostMapping("/proc")
-    public CalendarVO proc(@RequestBody CalendarVO vo){
-        System.out.println(vo);
-        CalendarMaker cm = new CalendarMaker(vo);
-        vo.setCm(cm);
+    public CalendarVO proc(@RequestBody CalendarVO vo) throws IOException{
+        /////
+        // 선언
+        /////
+        LocalDate date;
 
+        /////
+        // 유효성 검사
+        /////
+
+        if(vo.getYear() == null || vo.getMonth() == null){
+            throw new IOException("잘못된 접근");
+        }else if((0 > vo.getMonth()) || ( 12 < vo.getMonth())){
+            throw new IOException("존재하지 않는 달");
+        }
+
+        /////
+        // 로직
+        /////
+        vo.setCm(new CalendarMaker(vo));
+
+        /////
+        // 반환
+        /////
         return vo;
     }
 
