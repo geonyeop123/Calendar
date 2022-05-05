@@ -47,6 +47,7 @@ public class CalendarController {
         // 유효성 검사
         /////
 
+        // 값이 없거나 입력된 달이 0~12이 아닌 경우 에러 발생시키기
         if(vo.getYear() == null || vo.getMonth() == null){
             throw new IOException("잘못된 접근");
         }else if((0 > vo.getMonth()) || ( 12 < vo.getMonth())){

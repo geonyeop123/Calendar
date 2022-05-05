@@ -108,7 +108,6 @@
         let buttonFunction = function(mode){
             // mode에 따라 분기 처리
             buttonFlag = mode == 'N' ? true : false;
-            console.log("click");
             month = buttonFlag ? month + 1 : month - 1;
 
             if(buttonFlag ? month > 12 : month < 1){
