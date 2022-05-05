@@ -72,19 +72,35 @@
             })
         }
         let drawCalendar = function(vo){
-            tbody = $('.calendar_table > tbody');
-            console.log(tbody);
+            tbody = $('.calendar_body');
             if(tbody != null) tbody.remove();
 
-            let tbodyHTML = "<tbody>";
+            let tbodyHTML = "<tbody class='calendar_body'>";
             $.each(vo.cm.dayList, function(index, item){
                 if( index == 0 || index % 7 == 0) tbodyHTML += "<tr>";
                 tbodyHTML += "<td>"+item+"</td>";
             })
             tbodyHTML += "</tbody>";
             $('table').append(tbodyHTML);
+
             $('.title_year').html(vo.year);
             $('.title_month').html(vo.month);
+
+            $('.calendar_body tr:first td').each(function(){
+                if(parseInt($(this).html()) > 10 ){
+                    $(this).addClass('anotherDay');
+                }else{
+                    return;
+                }
+            });
+
+            $('.calendar_body tr:last td').each(function(){
+                if(parseInt($(this).html()) < 10 ){
+                    $(this).addClass('anotherDay');
+                }else{
+                    return;
+                }
+            });
         }
         $('.next_btn').on("click",function(){
             if(month == '12'){
