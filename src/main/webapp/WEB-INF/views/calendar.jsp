@@ -105,15 +105,15 @@
         }
 
         // button을 클릭 시 수행될 함수
-        let buttonFunction = (mode)=>{
+        let buttonFunction = function(mode){
             // mode에 따라 분기 처리
             buttonFlag = mode == 'N' ? true : false;
-
-            month = buttonFlag ? month++ : month--;
+            console.log("click");
+            month = buttonFlag ? month + 1 : month - 1;
 
             if(buttonFlag ? month > 12 : month < 1){
                 month = buttonFlag ? 1 : 12;
-                year = buttonFlag ? year++ : year--;
+                year = buttonFlag ? year + 1 : year - 1;
             }
 
             makeCalendar(year, month);
@@ -141,7 +141,7 @@
         // 이벤트
         /////
 
-        $('.next_btn').on("click",()=> buttonFunction('N'));
+        $('.next_btn').on("click", ()=> buttonFunction('N'));
 
         $('.prev_btn').on("click", ()=> buttonFunction('P'));
 
