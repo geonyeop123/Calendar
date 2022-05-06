@@ -22,6 +22,7 @@ public class CalendarController {
         /////
         // 유효성 검사
         /////
+
         // 값이 없거나, month가 0~12가 아닌 경우 현재의 일자로 세팅
         if((vo.getYear() == null || vo.getMonth() == null) || (0 > vo.getMonth()) || ( 12 < vo.getMonth())){
             date = LocalDate.now();
@@ -38,10 +39,6 @@ public class CalendarController {
     @ResponseBody
     @PostMapping("/proc")
     public CalendarVO proc(@RequestBody CalendarVO vo) throws IOException{
-        /////
-        // 선언
-        /////
-        LocalDate date;
 
         /////
         // 유효성 검사
@@ -57,7 +54,7 @@ public class CalendarController {
         /////
         // 로직
         /////
-        vo.setCm(new CalendarMaker(vo));
+
 
         /////
         // 반환

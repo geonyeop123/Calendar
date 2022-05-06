@@ -42,7 +42,7 @@
         /////
         // 변수 선언
         /////
-
+        alert(new Date());
         let tbody;
         let dateJSON = {};
         let year = parseInt('${calendarVO.year}');
@@ -84,15 +84,20 @@
                 // 최초와 7번째마다 tr태그로 구분
                 if( index == 0 || index % 7 == 0) tbodyHTML += "<tr>";
                 tbodyHTML += "<td>"+item+"</td>";
-            })
+            });
+
+
             // tbody를 table에 삽입
             tbodyHTML += "</tbody>";
             $('table').append(tbodyHTML);
+
             // calendar의 타이틀 변경
             $('.title_year').html(vo.year);
             $('.title_month').html(vo.month);
+
             // 첫번째, 마지막 td를 가져옴
             firstLastTr = [$('.calendar_body tr:first td'), $('.calendar_body tr:last td')];
+
             // 전달 혹은 다음달의 값이 있는 경우 anotherDay class 추가
             firstLastTr.forEach((tr, index)=>{
                 tr.each(function(){
@@ -117,6 +122,7 @@
 
             makeCalendar(year, month);
         }
+
         // $('.next_btn').on("click",function(){
         //     if(month == '12'){
         //         year++;

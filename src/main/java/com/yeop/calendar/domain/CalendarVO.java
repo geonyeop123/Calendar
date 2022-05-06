@@ -1,9 +1,11 @@
 package com.yeop.calendar.domain;
 
+import java.util.Map;
+
 public class CalendarVO {
     private Integer year;
     private Integer month;
-    private CalendarMaker cm;
+    private Map<Integer, Integer> dateMap;
 
     public CalendarVO(){}
 
@@ -12,7 +14,7 @@ public class CalendarVO {
         this.month = month;
     }
 
-    public void setCm(CalendarMaker cm) { this.cm = cm; }
+    public void setDateMap(Map dateMap) { this.dateMap = dateMap; }
 
     public Integer getYear() {
         return year;
@@ -30,8 +32,8 @@ public class CalendarVO {
         this.month = month;
     }
 
-    public CalendarMaker getCm() {
-        return cm;
+    public Map<Integer, Integer> getDateMap() {
+        return dateMap;
     }
 
 
@@ -40,7 +42,7 @@ public class CalendarVO {
         return "DateVO{" +
                 "year=" + year +
                 ", month=" + month +
-                ", cm=" + cm +
+                ", dateMap=" + dateMap +
                 '}';
     }
 }
