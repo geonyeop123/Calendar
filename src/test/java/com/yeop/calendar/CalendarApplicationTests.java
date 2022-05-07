@@ -14,11 +14,7 @@ class CalendarApplicationTests {
 
     @Test
     void contextLoads() {
-        CalendarVO vo = new CalendarVO(2022, 5);
-        CalendarMaker cm = new CalendarMaker(vo);
-        List<Map<String, Integer>> list = cm.createDateList();
-        System.out.println(list);
+        LocalDate date = LocalDate.of(2022, 1, 1);
+        System.out.println(date.plusMonths(1));
     }
-
-
 }

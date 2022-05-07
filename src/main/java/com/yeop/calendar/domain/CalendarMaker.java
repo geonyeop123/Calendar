@@ -8,14 +8,17 @@ import java.util.Map;
 
 public class CalendarMaker {
     private int yoil;
+
     private LocalDate date;
+
     private int lastDayYoil;
 
     private LocalDate startDate;
 
     private LocalDate lastDate;
 
-    private List<Map<String, Integer>> dateList;
+    private List<LocalDate> dateList;
+
     public CalendarMaker(){}
 
     public CalendarMaker(Integer year, Integer month){
@@ -29,30 +32,19 @@ public class CalendarMaker {
         // n년 n월의 전달의 마지막 일의 요일 세팅
         lastDayYoil = date.plusDays(date.lengthOfMonth() - 1).getDayOfWeek().getValue();
         // 시작일
-        startDate = (yoil == 7) ? date : date.minusDays(yoil - 2);
+        startDate = (yoil == 7) ? date : date.minusDays(yoil);
         // 종료일
         lastDate = lastDayYoil == 6 ? date.plusDays(date.lengthOfMonth() - 1)
                 : date.plusDays(date.lengthOfMonth() - 1 + (lastDayYoil == 7 ? 6 : 6 - lastDayYoil));
 
     }
 
-    public List<Map<String, Integer>> createDateList(){
-        dateList = new ArrayList<Map<String, Integer>>();
-        Map map = new HashMap<String, Integer>();
+    public List<LocalDate> createDateList(){
+        dateList = new ArrayList<LocalDate>();
         int cnt = 0;
         while(true){
             LocalDate currentDate = startDate.plusDays(cnt);
-
-            int month = currentDate.getMonthValue();
-            int day = currentDate.getDayOfMonth();
-
-            map.put("month", month);
-            map.put("day", day);
-            System.out.println("map = " + map);
-            dateList.add(map);
-            System.out.println("dateList = " + dateList);
-            System.out.println("currentDate = " + currentDate);
-            System.out.println("lastDate = " + lastDate);
+            dateList.add(currentDate);
             if(currentDate.equals(lastDate)) return dateList;
             cnt++;
         }

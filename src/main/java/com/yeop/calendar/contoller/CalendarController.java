@@ -55,6 +55,7 @@ public class CalendarController {
         // 로직
         /////
 
+        vo.setDateList(new CalendarMaker(vo).createDateList());
 
         /////
         // 반환

@@ -42,15 +42,13 @@
         /////
         // 변수 선언
         /////
-        alert(new Date());
         let tbody;
         let dateJSON = {};
         let year = parseInt('${calendarVO.year}');
         let month = parseInt('${calendarVO.month}');
+        let listMonth = 0;
+        let listDay = 0;
         let tbodyHTML = "";
-        // draw 시 전 달, 다음 달의 일자에 class를 추가하기 위해 첫번째와 마지막 tr을 담을 list
-        let firstLastTr = [];
-        let buttonFlag = false;
 
         // calendar를 만드는 ajax 함수
         let makeCalendar = function(year, month){
@@ -80,12 +78,18 @@
             // 그릴 tbody 생성
             tbodyHTML = "<tbody class='calendar_body'>";
 
-            $.each(vo.cm.dayList, function(index, item){
+            $.each(vo.dateList, function(index, item){
+                listMonth = parseInt(item.substring(5,7));
+                listDay = item.substring(8,10);
                 // 최초와 7번째마다 tr태그로 구분
                 if( index == 0 || index % 7 == 0) tbodyHTML += "<tr>";
-                tbodyHTML += "<td>"+item+"</td>";
+                // 표시 해줄 일자의 달이 현재 달과 다를 경우 클래스 추가
+                if(listMonth != month){
+                    tbodyHTML += "<td class='anotherMonth'>"+listDay+"</td>";
+                }else{
+                    tbodyHTML += "<td>"+listDay+"</td>";
+                }
             });
-
 
             // tbody를 table에 삽입
             tbodyHTML += "</tbody>";
@@ -94,53 +98,21 @@
             // calendar의 타이틀 변경
             $('.title_year').html(vo.year);
             $('.title_month').html(vo.month);
-
-            // 첫번째, 마지막 td를 가져옴
-            firstLastTr = [$('.calendar_body tr:first td'), $('.calendar_body tr:last td')];
-
-            // 전달 혹은 다음달의 값이 있는 경우 anotherDay class 추가
-            firstLastTr.forEach((tr, index)=>{
-                tr.each(function(){
-                    if(index == 0 ? $(this).html() > 10
-                                  : $(this).html() < 10 ){
-                        $(this).addClass('anotherDay');
-                    }
-                })
-            })
         }
 
         // button을 클릭 시 수행될 함수
         let buttonFunction = function(mode){
             // mode에 따라 분기 처리
-            buttonFlag = mode == 'N' ? true : false;
-            month = buttonFlag ? month + 1 : month - 1;
-
-            if(buttonFlag ? month > 12 : month < 1){
-                month = buttonFlag ? 1 : 12;
-                year = buttonFlag ? year + 1 : year - 1;
+            month = mode == 'N' ? month + 1 : month - 1;
+            if(month > 12){
+                month = 1;
+                year++;
+            }else if(month < 1){
+                month = 12;
+                year--;
             }
-
             makeCalendar(year, month);
         }
-
-        // $('.next_btn').on("click",function(){
-        //     if(month == '12'){
-        //         year++;
-        //         month = 1;
-        //     }else{
-        //         month++;
-        //     }
-        //     getDate(year, month);
-        // })
-        // $('.prev_btn').on("click",function(){
-        //     if(month == 1){
-        //         year--;
-        //         month = 12;
-        //     }else{
-        //         month--;
-        //     }
-        //     getDate(year, month);
-        // })
 
         /////
         // 이벤트

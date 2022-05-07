@@ -1,11 +1,13 @@
 package com.yeop.calendar.domain;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 public class CalendarVO {
     private Integer year;
     private Integer month;
-    private Map<Integer, Integer> dateMap;
+    private List<LocalDate> dateList;
 
     public CalendarVO(){}
 
@@ -14,7 +16,7 @@ public class CalendarVO {
         this.month = month;
     }
 
-    public void setDateMap(Map dateMap) { this.dateMap = dateMap; }
+    public void setDateList(List dateList) { this.dateList = dateList; }
 
     public Integer getYear() {
         return year;
@@ -32,8 +34,8 @@ public class CalendarVO {
         this.month = month;
     }
 
-    public Map<Integer, Integer> getDateMap() {
-        return dateMap;
+    public List<LocalDate> getDateList() {
+        return dateList;
     }
 
 
@@ -42,7 +44,7 @@ public class CalendarVO {
         return "DateVO{" +
                 "year=" + year +
                 ", month=" + month +
-                ", dateMap=" + dateMap +
+                ", dateList=" + dateList +
                 '}';
     }
 }
