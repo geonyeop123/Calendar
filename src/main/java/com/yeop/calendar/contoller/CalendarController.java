@@ -38,8 +38,9 @@ public class CalendarController {
 
     @ResponseBody
     @PostMapping("/proc")
-    public CalendarVO proc(@RequestBody CalendarVO vo) throws IOException{
+    public CalendarVO proc(@RequestBody CalendarVO vo) throws Exception{
 
+        CalendarMaker cm = null;
         /////
         // 유효성 검사
         /////
@@ -54,8 +55,9 @@ public class CalendarController {
         /////
         // 로직
         /////
-
-        vo.setDateList(new CalendarMaker(vo).createDateList());
+        cm = new CalendarMaker(vo);
+        vo.setDateList(cm.createDateList());
+        vo.setHolidayList(cm.createHolidayList());
 
         /////
         // 반환

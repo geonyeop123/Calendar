@@ -60,6 +60,7 @@
                 headers : { "content-type": "application/json"},
                 data : JSON.stringify(dateJSON),
                 success : function(result){
+                    console.log(result);
                     drawCalendar(result);
                 },
                 error: function(request,status,error){
@@ -85,9 +86,9 @@
                 if( index == 0 || index % 7 == 0) tbodyHTML += "<tr>";
                 // 표시 해줄 일자의 달이 현재 달과 다를 경우 클래스 추가
                 if(listMonth != month){
-                    tbodyHTML += "<td class='anotherMonth'>"+listDay+"</td>";
+                    tbodyHTML += "<td class='anotherMonth'><p>"+listDay+"</p></td>";
                 }else{
-                    tbodyHTML += "<td>"+listDay+"</td>";
+                    tbodyHTML += "<td><p>"+listDay+"</p></td>";
                 }
             });
 

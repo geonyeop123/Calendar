@@ -17,4 +17,12 @@ class CalendarApplicationTests {
         LocalDate date = LocalDate.of(2022, 1, 1);
         System.out.println(date.plusMonths(1));
     }
+
+    @Test
+    void holidayLoads() throws Exception{
+        CalendarVO vo = new CalendarVO(2022, 9);
+
+        vo.setHolidayList(new CalendarMaker(vo).createHolidayList());
+        System.out.println(vo);
+    }
 }

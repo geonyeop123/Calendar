@@ -8,6 +8,7 @@ public class CalendarVO {
     private Integer year;
     private Integer month;
     private List<LocalDate> dateList;
+    private List<Holiday> holidayList;
 
     public CalendarVO(){}
 
@@ -16,7 +17,7 @@ public class CalendarVO {
         this.month = month;
     }
 
-    public void setDateList(List dateList) { this.dateList = dateList; }
+
 
     public Integer getYear() {
         return year;
@@ -38,13 +39,25 @@ public class CalendarVO {
         return dateList;
     }
 
+    public List<Holiday> getHolidayList() {
+        return holidayList;
+    }
+
+    public void setHolidayList(List<Holiday> holidayList) {
+        this.holidayList = holidayList;
+    }
+
+    public void setDateList(List<LocalDate> dateList) {
+        this.dateList = dateList;
+    }
 
     @Override
     public String toString() {
-        return "DateVO{" +
+        return "CalendarVO{" +
                 "year=" + year +
                 ", month=" + month +
                 ", dateList=" + dateList +
+                ", holidayList=" + holidayList +
                 '}';
     }
 }

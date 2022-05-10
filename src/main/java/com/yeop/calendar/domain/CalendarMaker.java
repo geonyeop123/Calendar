@@ -19,14 +19,22 @@ public class CalendarMaker {
 
     private List<LocalDate> dateList;
 
+    private List<Holiday> holidayList;
+
+    private int year;
+    private int month;
+
     public CalendarMaker(){}
 
     public CalendarMaker(Integer year, Integer month){
         this(new CalendarVO(year, month));
     }
     public CalendarMaker(CalendarVO vo){
+        year = vo.getYear();
+
+        month = vo.getMonth();
         // Date 값 세팅
-        date = LocalDate.of(vo.getYear(), vo.getMonth(), 1);
+        date = LocalDate.of(year, month, 1);
         // n년 n월 1일의 요일 값 세팅
         yoil = date.getDayOfWeek().getValue();
         // n년 n월의 전달의 마지막 일의 요일 세팅
@@ -50,6 +58,9 @@ public class CalendarMaker {
         }
     }
 
+    public List<Holiday> createHolidayList() throws Exception{
+        return HolidayAPI.getHoliday(year, month);
+    }
 
     @Override
     public String toString() {
