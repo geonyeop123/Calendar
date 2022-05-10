@@ -72,6 +72,7 @@
         }
         // calendar를 그리는 함수
         let drawCalendar = function(vo){
+            let holiday = {};
             // 현재 그려진 tbody가 있는지 체크, 있으면 지움
             tbody = $('.calendar_body');
             if(tbody != null) tbody.remove();
@@ -79,6 +80,13 @@
             // 그릴 tbody 생성
             tbodyHTML = "<tbody class='calendar_body'>";
 
+            // Holiday 객체 생성
+            // key = date
+            // value = name
+            vo.holidayList.forEach((data)=>{
+                holiday[data.date] = data.name;
+            })
+            console.log(holiday);
             $.each(vo.dateList, function(index, item){
                 listMonth = parseInt(item.substring(5,7));
                 listDay = item.substring(8,10);
@@ -88,7 +96,11 @@
                 if(listMonth != month){
                     tbodyHTML += "<td class='anotherMonth'><p>"+listDay+"</p></td>";
                 }else{
-                    tbodyHTML += "<td><p>"+listDay+"</p></td>";
+                    if(holiday[item] != undefined){
+                        tbodyHTML += "<td class='holiday'><p>"+listDay+"</p><p class='holiday_name'>"+holiday[item]+"</p></td>";
+                    }else{
+                        tbodyHTML += "<td><p>"+listDay+"</p></td>";
+                    }
                 }
             });
 
