@@ -86,6 +86,7 @@
             vo.holidayList.forEach((data)=>{
                 holiday[data.date] = data.name;
             })
+
             console.log(holiday);
             $.each(vo.dateList, function(index, item){
                 listMonth = parseInt(item.substring(5,7));
