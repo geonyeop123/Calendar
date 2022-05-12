@@ -60,12 +60,18 @@ public class CalendarMaker {
     }
 
     public List<LocalDate> createDateList(){
+        LocalDate currentDate = null;
         dateList = new ArrayList<LocalDate>();
         int cnt = 0;
+
         while(true){
-            LocalDate currentDate = startDate.plusDays(cnt);
+
+            currentDate = startDate.plusDays(cnt);
+
             dateList.add(currentDate);
+
             if(currentDate.equals(lastDate)) return dateList;
+
             cnt++;
         }
     }
@@ -89,7 +95,7 @@ public class CalendarMaker {
         urlBuilder = new StringBuilder("http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo"); /*URL*/
         urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=HFZ7esAlPNwhEdbkFYSQSBpIpTrzsnPTiF%2FDS9WjP69UGXAvVaH8neE2AB1fLbvaTIjFEzPdzIr4236vzwyCYg%3D%3D"); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("solYear","UTF-8") + "=" + URLEncoder.encode(syear, "UTF-8")); /*연*/
-        urlBuilder.append("&" + URLEncoder.encode("solMonth","UTF-8") + "=" + URLEncoder.encode(smonth, "UTF-8")); /*월*/
+//        urlBuilder.append("&" + URLEncoder.encode("solMonth","UTF-8") + "=" + URLEncoder.encode(smonth, "UTF-8")); /*월*/
         url = new URL(urlBuilder.toString());
         conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
