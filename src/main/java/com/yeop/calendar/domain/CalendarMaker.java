@@ -10,16 +10,13 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class CalendarMaker {
     private int yoil;
@@ -89,7 +86,6 @@ public class CalendarMaker {
 
         String syear = String.valueOf(year);
         String smonth = month < 10 ? "0" + month : String.valueOf(month);
-        List<Holiday> holidayList = new ArrayList<Holiday>();
         urlBuilder = new StringBuilder("http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo"); /*URL*/
         urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=HFZ7esAlPNwhEdbkFYSQSBpIpTrzsnPTiF%2FDS9WjP69UGXAvVaH8neE2AB1fLbvaTIjFEzPdzIr4236vzwyCYg%3D%3D"); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("solYear","UTF-8") + "=" + URLEncoder.encode(syear, "UTF-8")); /*연*/
@@ -104,41 +100,11 @@ public class CalendarMaker {
         } else {
             br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
         }
-        StringBuilder sb = new StringBuilder();
-        String line;
-        while ((line = br.readLine()) != null) {
-            sb.append(line);
-        }
-        br.close();
         conn.disconnect();
-        /* StringBuilder
-        <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-        <response>
-            <header>
-                <resultCode>00</resultCode>
-                <resultMsg>NORMAL SERVICE.</resultMsg>
-            </header>
-            <body>
-                <items>
-                    <item>
-                        <dateKind>01</dateKind>
-                        <dateName>공휴일 이름</dateName>
-                        <isHoliday>Y</isHoliday>
-                        <locdate>공휴일 날짜</locdate>
-                        <seq>1</seq>
-                    </item>
-                </items>
-                <numOfRows>10</numOfRows>
-                <pageNo>1</pageNo>
-                <totalCount>1</totalCount>
-            </body>
-        </response>
-        */
-
         dbFactory = DocumentBuilderFactory.newInstance();
         db = dbFactory.newDocumentBuilder();
-        document = db.parse(new InputSource(new StringReader(sb.toString())));
-
+        document = db.parse(new InputSource(br));
+        br.close();
         // item 가져오기
         list = document.getElementsByTagName("item");
 
@@ -154,8 +120,7 @@ public class CalendarMaker {
                 holidayList.add(holiday);
             }
         }
-        long end = System.currentTimeMillis();
-        System.out.println("open api " + (start - end) + "ms");
+
         return holidayList;
     }
 
